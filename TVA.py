@@ -49,19 +49,23 @@ def get_voting_situation():
                     voting_situation[r][v] = row[r]
 
                 break
-    else:
+    elif mode == 'r':
         # Randomly generate preferences
         for voter in range(voters):
             prefs = candidates[:]
             random.shuffle(prefs)
             for preference in range(preferences):
                 voting_situation[preference][voter] = prefs[preference]
+    else:
+        print("Invalid mode selected. Please choose 'r' or 'm'.")
+        return None, None, None, None
 
     return voting_situation, candidates, voters, preferences
 
 
 if __name__ == '__main__':
     voting_situation, candidates, voters, preferences = get_voting_situation()
+    
     print("\nGenerated Voting Situation:")
     print(voting_situation)
     print(candidates)
