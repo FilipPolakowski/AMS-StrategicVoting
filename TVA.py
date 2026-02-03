@@ -61,6 +61,7 @@ def get_voting_situation():
         return None, None, None, None
 
     return voting_situation, candidates, voters, preferences
+
 def print_voting_situation(voting_situation, voters, preferences):
     print("\nVoting situation (rows = ranks, columns = voters):")
 
