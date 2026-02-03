@@ -46,7 +46,21 @@ def get_voting_situation():
             break
 
     return voting_situation, candidates, voters, preferences
+def print_voting_situation(voting_situation, voters, preferences):
+    print("\nVoting situation (rows = ranks, columns = voters):")
 
+    # Header
+    print("      ", end="")
+    for v in range(voters):
+        print(f"V{v+1} ", end="")
+    print()
+
+    # Rows
+    for r in range(preferences):
+        print(f"Rank {r+1}: ", end="")
+        for v in range(voters):
+            print(f" {voting_situation[r][v]} ", end="")
+        print()
 
 if __name__ == '__main__':
     voting_situation, candidates, voters, preferences = get_voting_situation()
@@ -54,3 +68,4 @@ if __name__ == '__main__':
     print(candidates)
     print(voters)
     print(preferences)
+    print_voting_situation(voting_situation,voters, preferences)
