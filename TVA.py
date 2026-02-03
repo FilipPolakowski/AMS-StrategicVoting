@@ -8,6 +8,8 @@
 
 #Define happiness levels and risk of strategic voting measures
 
+import random
+
 
 def get_voting_situation():
     voters = int(input("Enter how many voters: "))
@@ -20,36 +22,47 @@ def get_voting_situation():
     # Create table: rows = ranks, columns = voters
     voting_situation = [[None for _ in range(voters)] for _ in range(preferences)]
 
-    # Input preferences voter by voter
-    for v in range(voters):
-        while True:
-            row_input = input(
-                f"Enter preferences for voter {v+1} "
-                f"(space-separated, e.g. A B C D): "
-            )
+    mode = input("Choose input mode - random (r) or manual (m): ").strip().lower()
 
-            row = row_input.upper().split()
+    if mode == 'm':
+        # Input preferences voter by voter
+        for v in range(voters):
+            while True:
+                row_input = input(
+                    f"Enter preferences for voter {v+1} "
+                    f"(space-separated, e.g. A B C D): "
+                )
 
-            # Validation
-            if len(row) != preferences:
-                print(f"Please enter exactly {preferences} preferences.")
-                continue
+                row = row_input.upper().split()
 
-            if set(row) != set(candidates):
-                print(f"Please use each candidate exactly once: {candidates}")
-                continue
+                # Validation
+                if len(row) != preferences:
+                    print(f"Please enter exactly {preferences} preferences.")
+                    continue
 
-            # Store column-wise (voter is column)
-            for r in range(preferences):
-                voting_situation[r][v] = row[r]
+                if set(row) != set(candidates):
+                    print(f"Please use each candidate exactly once: {candidates}")
+                    continue
 
-            break
+                # Store column-wise (voter is column)
+                for r in range(preferences):
+                    voting_situation[r][v] = row[r]
+
+                break
+    else:
+        # Randomly generate preferences
+        for voter in range(voters):
+            prefs = candidates[:]
+            random.shuffle(prefs)
+            for preference in range(preferences):
+                voting_situation[preference][voter] = prefs[preference]
 
     return voting_situation, candidates, voters, preferences
 
 
 if __name__ == '__main__':
     voting_situation, candidates, voters, preferences = get_voting_situation()
+    print("\nGenerated Voting Situation:")
     print(voting_situation)
     print(candidates)
     print(voters)
