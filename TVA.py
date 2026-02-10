@@ -10,6 +10,7 @@
 
 import random
 from borda_voting import borda_voting
+from voting_for_two import voting_for_two
 
 
 def get_voting_situation():
@@ -95,3 +96,5 @@ if __name__ == '__main__':
     print_voting_situation(voting_situation,voters, preferences)
     print("\nBorda Voting Results:")
     borda_voting(voting_situation, candidates, voters, preferences)
+    print("\nVoting for Two Results:")
+    voting_for_two(voting_situation, candidates, voters, preferences)
