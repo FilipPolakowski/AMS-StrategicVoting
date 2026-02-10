@@ -1,14 +1,15 @@
-#TODO! 4 voting schemes:
-#1:plurality
-#2:voting for two
-#3:Anti-plurality voting (veto)
-#4:Borda voting
+3#TODO! 4 voting schemes:
+#1:plurality - Philip
+#2:voting for two - Miel
+#3:Anti-plurality voting (veto) - Saanch
+#4:Borda voting - Panagiotis
 
 #Voting simulation
 
 #Define happiness levels and risk of strategic voting measures
 
 import random
+from borda_voting import borda_voting
 
 
 def get_voting_situation():
@@ -21,6 +22,10 @@ def get_voting_situation():
 
     # Create table: rows = ranks, columns = voters
     voting_situation = [[None for _ in range(voters)] for _ in range(preferences)]
+    print(voting_situation)
+    print("rows:", len(voting_situation))        # 3
+    print("cols:", len(voting_situation[0]))     # 4
+
 
     mode = input("Choose input mode - random (r) or manual (m): ").strip().lower()
 
@@ -78,12 +83,15 @@ def print_voting_situation(voting_situation, voters, preferences):
             print(f" {voting_situation[r][v]} ", end="")
         print()
 
+        
 if __name__ == '__main__':
     voting_situation, candidates, voters, preferences = get_voting_situation()
     
     print("\nGenerated Voting Situation:")
     print(voting_situation)
-    print(candidates)
-    print(voters)
-    print(preferences)
+    print('Number of candidates: ' + str(len(candidates)))
+    print('Number of voters: ' + str(voters))
+    print('Number of preferences: ' + str(preferences))
     print_voting_situation(voting_situation,voters, preferences)
+    print("\nBorda Voting Results:")
+    borda_voting(voting_situation, candidates, voters, preferences)
