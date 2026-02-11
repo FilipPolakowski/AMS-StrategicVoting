@@ -6,16 +6,16 @@ def anti_plurality_voting(voting_situation, candidates, voters, preferences):
     for candidate in candidates:
         score = 0
 
-        for i in range(voters):          # voters = columns
-            for j in range(preferences): # find candidate in ranking
+        for i in range(voters):          
+            for j in range(preferences): 
                 if voting_situation[j][i] == candidate:
-                    if j != preferences - 1:  # NOT last place
+                    if j != preferences - 1:  
                         score += 1
                     break
 
         scores.append(score)
 
-        # same tie-breaking rule
+
         if score > max_score:
             max_score = score
             winner = candidate
