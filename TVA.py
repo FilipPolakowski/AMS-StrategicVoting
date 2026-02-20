@@ -9,7 +9,9 @@
 #Define happiness levels and risk of strategic voting measures
 
 import random
+from voting_schemes.antiplurality_voting import anti_plurality_voting
 from voting_schemes.borda_voting import borda_voting
+from voting_schemes.plurality_voting import plurality_voting
 from voting_schemes.voting_for_two import voting_for_two
 
 
@@ -23,7 +25,7 @@ def get_voting_situation():
 
     # Create table: rows = ranks, columns = voters
     voting_situation = [[None for _ in range(voters)] for _ in range(preferences)]
-    print(voting_situation)
+    #print(voting_situation)
     print("rows:", len(voting_situation))        # 3
     print("cols:", len(voting_situation[0]))     # 4
 
@@ -72,7 +74,7 @@ def print_voting_situation(voting_situation, voters, preferences):
     print("\nVoting situation (rows = ranks, columns = voters):")
 
     # Header
-    print("      ", end="")
+    print("         ", end="")
     for v in range(voters):
         print(f"V{v+1} ", end="")
     print()
@@ -83,21 +85,6 @@ def print_voting_situation(voting_situation, voters, preferences):
         for v in range(voters):
             print(f" {voting_situation[r][v]} ", end="")
         print()
-
-
-def plurality_voting(voting_situation, candidates, voters, preferences):
-    scores = {c: 0 for c in candidates}
-
-    for v in range(voters):
-        for r in range(preferences):
-            if r == 0:  # only first rank counts because plurality
-                candidate = voting_situation[r][v]
-                scores[candidate] += 1
-
-    max_score = max(scores.values())
-    winners = [c for c, s in scores.items() if s == max_score]
-
-    return scores, winners
 
 def compute_happiness(voting_situation, winner, voters, preferences):
     happiness_per_voter = []
@@ -119,19 +106,61 @@ def compute_happiness(voting_situation, winner, voters, preferences):
     return happiness_per_voter, average_happiness
 
 
+def run_voting_scheme(scheme_name, voting_function, voting_situation, candidates, voters, preferences):
+    print(f"\n{scheme_name}:")
+    scores, winner = voting_function(voting_situation, candidates, voters, preferences)
+    happiness_per_voter, avg_happiness = compute_happiness(voting_situation, winner, voters, preferences)
+    print(f"Average Happiness: {avg_happiness:.3f}")
+    
+    return scores, winner, avg_happiness
+
+
 if __name__ == '__main__':
     voting_situation, candidates, voters, preferences = get_voting_situation()
     
-    print("\nGenerated Voting Situation:")
-    print(voting_situation)
-    print('Number of candidates: ' + str(len(candidates)))
-    print('Number of voters: ' + str(voters))
-    print('Number of preferences: ' + str(preferences))
-    print_voting_situation(voting_situation,voters, preferences)
-    scores,winners = plurality_voting(voting_situation,candidates,voters,preferences)
-    print(scores)
-    print(winners)
-    winner = winners[0]
-    happiness_per_voter, average_happiness = compute_happiness(voting_situation,winner,voters, preferences)
-    print(happiness_per_voter)
-    print(average_happiness)
+    print("Voting Situation :")
+    print(f"Number of candidates: {len(candidates)}")
+    print(f"Number of voters: {voters}")
+    print_voting_situation(voting_situation, voters, preferences)
+    
+    # Ask user which voting scheme to use
+    print("\nSELECT VOTING SCHEME")
+    print("1. Plurality")
+    print("2. Voting for Two")
+    print("3. Anti-Plurality")
+    print("4. Borda")
+    print("5. All (compare all schemes)")
+    
+    scheme = input("\nEnter your choice (1-5): ").strip()
+    
+    if scheme == '1':
+        run_voting_scheme("PLURALITY VOTING", plurality_voting, voting_situation, candidates, voters, preferences)
+        
+    elif scheme == '2':
+        run_voting_scheme("VOTING FOR TWO", voting_for_two, voting_situation, candidates, voters, preferences)
+        
+    elif scheme == '3':
+        run_voting_scheme("ANTI-PLURALITY VOTING", anti_plurality_voting, voting_situation, candidates, voters, preferences)
+        
+    elif scheme == '4':
+        run_voting_scheme("BORDA VOTING", borda_voting, voting_situation, candidates, voters, preferences)
+        
+    elif scheme == '5':
+        # Run all voting schemes
+        plurality_scores, plurality_winner, plurality_avg_happiness = run_voting_scheme("PLURALITY VOTING", plurality_voting, voting_situation, candidates, voters, preferences)
+        
+        vft_scores, vft_winner, vft_avg_happiness = run_voting_scheme("VOTING FOR TWO", voting_for_two, voting_situation, candidates, voters, preferences)
+        
+        anti_scores, anti_winner, anti_avg_happiness = run_voting_scheme("ANTI-PLURALITY VOTING", anti_plurality_voting, voting_situation, candidates, voters, preferences)
+        
+        borda_scores, borda_winner, borda_avg_happiness = run_voting_scheme("BORDA VOTING", borda_voting, voting_situation, candidates, voters, preferences)
+        
+        # Summary comparison
+        print("\nSUMMARY:")
+        print(f"Plurality:      Winner = {plurality_winner}, Avg Happiness = {plurality_avg_happiness:.3f}")
+        print(f"Voting for Two: Winner = {vft_winner}, Avg Happiness = {vft_avg_happiness:.3f}")
+        print(f"Anti-Plurality: Winner = {anti_winner}, Avg Happiness = {anti_avg_happiness:.3f}")
+        print(f"Borda:          Winner = {borda_winner}, Avg Happiness = {borda_avg_happiness:.3f}")
+    
+    else:
+        print("Invalid choice. Please run the program again and select 1-5.")

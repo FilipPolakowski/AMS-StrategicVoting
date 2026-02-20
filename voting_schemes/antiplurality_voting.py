@@ -22,7 +22,8 @@ def anti_plurality_voting(voting_situation, candidates, voters, preferences):
         elif score == max_score and candidate < winner:
             winner = candidate
 
-        print(f"Candidate {candidate} score is: {score}")
+        # print(f"Candidate {candidate} Antiplurality score is: {score}")
 
-    print(f"\nCandidate {winner} is the winner with {max_score} points")
-    print(scores)
+    print(f"\nCandidate {winner} is the Antiplurality winner with {max_score} points")
+
+    return scores, winner

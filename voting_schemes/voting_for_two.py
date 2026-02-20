@@ -22,8 +22,9 @@ def voting_for_two(voting_situation, candidates, voters, preferences):
             winner = candidate                          # B (66) < A (65) is False, but A (65) < B (66) is True
             
         
-        print(f"Candidate {candidate} score is: {score}")
+        # print(f"Candidate {candidate} Voting for Two score is: {score}")
 
-    print(f"\nCandidate {winner} is the winner with {max_score} points")
-    print(scores)
+    print(f"\nCandidate {winner} is the Voting for Two winner with {max_score} points")
+
+    return scores, winner
 

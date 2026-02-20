@@ -1,5 +1,3 @@
-
-
 def borda_voting(voting_situation, candidates, voters, preferences):
     scores = []
     max_score = -1
@@ -23,8 +21,9 @@ def borda_voting(voting_situation, candidates, voters, preferences):
             winner = candidate                          # B (66) < A (65) is False, but A (65) < B (66) is True
             
         
-        print(f"Candidate {candidate} Borda score is: {score}")
+        # print(f"Candidate {candidate} Borda score is: {score}")
 
-    print(f"\nCandidate {winner} is the winner with {max_score} points")
-    print(scores)
+    print(f"\nCandidate {winner} is the Borda winner with {max_score} points")
+
+    return scores, winner
 
