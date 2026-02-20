@@ -9,8 +9,8 @@
 #Define happiness levels and risk of strategic voting measures
 
 import random
-from borda_voting import borda_voting
-from voting_for_two import voting_for_two
+from voting_schemes.borda_voting import borda_voting
+from voting_schemes.voting_for_two import voting_for_two
 
 
 def get_voting_situation():
