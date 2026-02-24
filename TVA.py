@@ -13,6 +13,9 @@ from voting_schemes.antiplurality_voting import anti_plurality_voting
 from voting_schemes.borda_voting import borda_voting
 from voting_schemes.plurality_voting import plurality_voting
 from voting_schemes.voting_for_two import voting_for_two
+from strategic_voting import strategic_vote
+from strategic_voting import compute_voting_risk
+from strategic_voting import compute_happiness
 
 
 def get_voting_situation():
@@ -86,24 +89,6 @@ def print_voting_situation(voting_situation, voters, preferences):
             print(f" {voting_situation[r][v]} ", end="")
         print()
 
-def compute_happiness(voting_situation, winner, voters, preferences):
-    happiness_per_voter = []
-    total_happiness = 0
-
-    for v in range(voters):
-        voter_happiness = 0
-
-        for r in range(preferences):
-            if voting_situation[r][v] == winner:
-                voter_happiness = 1 / (r + 1)
-                break
-
-        happiness_per_voter.append(voter_happiness)
-        total_happiness += voter_happiness
-
-    average_happiness = total_happiness / voters
-
-    return happiness_per_voter, average_happiness
 
 
 def run_voting_scheme(scheme_name, voting_function, voting_situation, candidates, voters, preferences):
@@ -130,8 +115,9 @@ if __name__ == '__main__':
     print("3. Anti-Plurality")
     print("4. Borda")
     print("5. All (compare all schemes)")
+    print("6. Strategic Voting Analysis")
     
-    scheme = input("\nEnter your choice (1-5): ").strip()
+    scheme = input("\nEnter your choice (1-6): ").strip()
     
     if scheme == '1':
         run_voting_scheme("PLURALITY VOTING", plurality_voting, voting_situation, candidates, voters, preferences)
@@ -162,5 +148,55 @@ if __name__ == '__main__':
         print(f"Anti-Plurality: Winner = {anti_winner}, Avg Happiness = {anti_avg_happiness:.3f}")
         print(f"Borda:          Winner = {borda_winner}, Avg Happiness = {borda_avg_happiness:.3f}")
     
+    elif scheme == '6':
+        # Strategic voting analysis
+        print("\nSTRATEGIC VOTING ANALYSIS")
+        print("Select voting scheme to analyze for strategic voting:")
+        print("1. Plurality")
+        print("2. Voting for Two")
+        print("3. Anti-Plurality")
+        print("4. Borda")
+        
+        sv_scheme = input("\nEnter your choice (1-4): ").strip()
+        
+        scheme_map = {
+            '1': ("Plurality", plurality_voting),
+            '2': ("Voting for Two", voting_for_two),
+            '3': ("Anti-Plurality", anti_plurality_voting),
+            '4': ("Borda", borda_voting)
+        }
+        
+        if sv_scheme in scheme_map:
+            scheme_name, voting_func = scheme_map[sv_scheme]
+            print(f"\nAnalyzing {scheme_name} for strategic voting...")
+            5050
+            result = strategic_vote(voting_func, voting_situation, candidates, voters, preferences)
+            
+            print(f"\n{'='*60}")
+            print(f"STRATEGIC VOTING ANALYSIS: {scheme_name}")
+            print(f"{'='*60}")
+            print(f"\nHonest Voting Results:")
+            print(f"  Winner: {result['original_winner']}")
+            print(f"  Avg Happiness: {result['original_avg_happiness']:.3f}")
+            
+            if result['changed']:
+                print(f"\nStrategic Voter Found: Voter {result['strategic_voter']} can improve!")
+                print(f"  Original Happiness: {result['strategic_voter_original_happiness']:.3f}")
+                print(f"  New Happiness: {result['strategic_voter_new_happiness']:.3f}")
+                print(f"  Improvement: {result['strategic_voter_new_happiness'] - result['strategic_voter_original_happiness']:.3f}")
+                print(f"\nAfter Strategic Vote:")
+                print(f"  New Winner: {result['new_winner']}")
+                print(f"  New Avg Happiness: {result['new_avg_happiness']:.3f}")
+                print(f"  Change in Avg Happiness: {result['new_avg_happiness'] - result['original_avg_happiness']:.3f}")
+                print(compute_voting_risk(result['original_avg_happiness'], result['new_avg_happiness']))
+            else:
+                print(f"\nNo voter can improve his/her happiness strategically voting through single swaps...")
+                print("No tactical voting risk, nobody votes strategically because voters are already as happy as they can be with their honest vote.")
+
+            print(f"\n{'='*60}")
+        else:
+            print("Invalid choice. Please run the program again and select 1-4.")
+    
     else:
-        print("Invalid choice. Please run the program again and select 1-5.")
+        print("Invalid choice. Please run the program again and select 1-6.")
+    
