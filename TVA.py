@@ -9,13 +9,17 @@
 #Define happiness levels and risk of strategic voting measures
 
 import random
+
 from voting_schemes.antiplurality_voting import anti_plurality_voting
 from voting_schemes.borda_voting import borda_voting
 from voting_schemes.plurality_voting import plurality_voting
 from voting_schemes.voting_for_two import voting_for_two
+
 from strategic_voting import strategic_vote
 from strategic_voting import compute_voting_risk
 from strategic_voting import compute_happiness
+
+from ATVAs.ATVA_4 import strategic_vote_atva4, print_atva4_results
 
 
 def get_voting_situation():
@@ -116,8 +120,9 @@ if __name__ == '__main__':
     print("4. Borda")
     print("5. All (compare all schemes)")
     print("6. Strategic Voting Analysis")
+    print("7. ATVA Analysis")
     
-    scheme = input("\nEnter your choice (1-6): ").strip()
+    scheme = input("\nEnter your choice (1-7): ").strip()
     
     if scheme == '1':
         run_voting_scheme("PLURALITY VOTING", plurality_voting, voting_situation, candidates, voters, preferences)
@@ -196,7 +201,43 @@ if __name__ == '__main__':
             print(f"\n{'='*60}")
         else:
             print("Invalid choice. Please run the program again and select 1-4.")
-    
+    elif scheme == '7':
+        print("\nADVANCED TACTICAL VOTING ANALYSIS (ATVA)")
+        print("Choose ATVA variant:")
+        print("1. ATVA-1 ")
+        print("2. ATVA-2 ")
+        print("3. ATVA-3 ")
+        print("4. ATVA-4 (many voters vote strategically)")
+
+        atva_choice = input("\nEnter your choice (1-4): ").strip()
+
+        print("\nSelect voting scheme for ATVA:")
+        print("1. Plurality")
+        print("2. Voting for Two")
+        print("3. Anti-Plurality")
+        print("4. Borda")
+        sv_scheme = input("\nEnter your choice (1-4): ").strip()
+
+        scheme_map = {
+        '1': ("Plurality", plurality_voting),
+        '2': ("Voting for Two", voting_for_two),
+        '3': ("Anti-Plurality", anti_plurality_voting),
+        '4': ("Borda", borda_voting),
+    }
+
+        if sv_scheme not in scheme_map:
+            print("Invalid scheme choice.")
+
+        scheme_name, voting_func = scheme_map[sv_scheme]
+
+        if atva_choice == '4':
+            print(f"\nRunning ATVA-4 on {scheme_name}...")
+            result = strategic_vote_atva4(
+                voting_func, voting_situation, candidates, voters, preferences
+            )
+
+            print_atva4_results(result, scheme_name)
+
     else:
-        print("Invalid choice. Please run the program again and select 1-6.")
+        print("Invalid choice. Please run the program again and select 1-7.")
     
