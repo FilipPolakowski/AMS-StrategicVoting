@@ -58,19 +58,49 @@ def _set_voter_pref(voting_situation, voter_index, pref_list):
         voting_situation[r][voter_index] = pref_list[r]
 
 """
-Voter swaps two positions at at time and does
- all the possible swaps (e.g. ABC -> BAC, CBA, ACB, etc.)
- to find a better outcome for themselves.
+Voter can perform strategic manipulations:
+1. Swap two positions (e.g., ABC -> BAC, CBA, ACB)
+2. Move a candidate to the top (boost strategy)
+3. Move a candidate to the bottom (bury strategy)
+These manipulations allow voters to find better outcomes for themselves.
 """
 
-def _all_single_swaps(pref_list):                                               # 
+def _all_strategic_manipulations(pref_list):                                    # 
+    """
+    Generate all possible strategic manipulations:
+    1. Single swaps: swap any two positions
+    2. Move to top: move any candidate to first position (boost strategy)
+    3. Move to bottom: move any candidate to last position (bury strategy)
+    
+    For example: [A, B, C, D]
+    - Swaps: [B, A, C, D], [C, B, A, D], etc.
+    - Move to top: [B, A, C, D], [C, A, B, D], [D, A, B, C]
+    - Move to bottom: [B, C, D, A], [A, C, D, B], [A, B, D, C]
+    """
     out = []
     m = len(pref_list)
+    
+    # 1. All single swaps
     for i in range(m - 1):
         for j in range(i + 1, m):
-            temp = pref_list[:]  # copy
+            temp = pref_list[:]
             temp[i], temp[j] = temp[j], temp[i]
             out.append(temp)
+    
+    # 2. Move each candidate to top (position 0)
+    for i in range(1, m):  # Skip i=0 (already at top)
+        temp = pref_list[:]
+        candidate = temp.pop(i)  # Remove from current position
+        temp.insert(0, candidate)  # Insert at top
+        out.append(temp)
+    
+    # 3. Move each candidate to bottom (last position)
+    for i in range(m - 1):  # Skip i=m-1 (already at bottom)
+        temp = pref_list[:]
+        candidate = temp.pop(i)  # Remove from current position
+        temp.append(candidate)  # Append to bottom
+        out.append(temp)
+    
     return out
 
 
@@ -106,7 +136,7 @@ def strategic_vote(voting_function, voting_situation, candidates, voters, prefer
         best_trial_avg = None
         best_v_happy = baseline_v_happy
 
-        for tactical_pref in _all_single_swaps(original_pref):
+        for tactical_pref in _all_strategic_manipulations(original_pref):
 
             trial = deepcopy(voting_situation)
             _set_voter_pref(trial, v, tactical_pref)

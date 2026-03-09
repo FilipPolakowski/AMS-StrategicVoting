@@ -16,6 +16,7 @@ from voting_schemes.voting_for_two import voting_for_two
 from strategic_voting import strategic_vote
 from strategic_voting import compute_voting_risk
 from strategic_voting import compute_happiness
+from counter_strategic_voting import counter_strategic_voting, print_counter_strategic_analysis
 
 
 def get_voting_situation():
@@ -116,8 +117,9 @@ if __name__ == '__main__':
     print("4. Borda")
     print("5. All (compare all schemes)")
     print("6. Strategic Voting Analysis")
+    print("7. Counter-Strategic Voting Analysis (Advanced TVA)")
     
-    scheme = input("\nEnter your choice (1-6): ").strip()
+    scheme = input("\nEnter your choice (1-7): ").strip()
     
     if scheme == '1':
         run_voting_scheme("PLURALITY VOTING", plurality_voting, voting_situation, candidates, voters, preferences)
@@ -197,6 +199,56 @@ if __name__ == '__main__':
         else:
             print("Invalid choice. Please run the program again and select 1-4.")
     
+    elif scheme == '7':
+        # Counter-strategic voting analysis
+        print("\nCOUNTER-STRATEGIC VOTING ANALYSIS (ADVANCED TVA)")
+        print("This analyzes multi-round strategic voting where voters respond to each other.")
+        print("\nSelect voting scheme to analyze:")
+        print("1. Plurality")
+        print("2. Voting for Two")
+        print("3. Anti-Plurality")
+        print("4. Borda")
+        print("5. All (compare all schemes)")
+        
+        csv_scheme = input("\nEnter your choice (1-5): ").strip()
+        
+        scheme_map = {
+            '1': ("Plurality", plurality_voting),
+            '2': ("Voting for Two", voting_for_two),
+            '3': ("Anti-Plurality", anti_plurality_voting),
+            '4': ("Borda", borda_voting)
+        }
+        
+        if csv_scheme == '5':
+            # Run counter-strategic analysis for all schemes
+            results = {}
+            for key, (name, func) in scheme_map.items():
+                print(f"\nAnalyzing {name}...")
+                result = counter_strategic_voting(func, voting_situation, candidates, voters, preferences)
+                results[name] = result
+                print_counter_strategic_analysis(result, name)
+            
+            # Summary comparison
+            print(f"\n{'='*70}")
+            print("COMPARATIVE SUMMARY")
+            print(f"{'='*70}")
+            print(f"\n{'Scheme':<20} {'Initial Winner':<15} {'Final Winner':<15} {'Moves':<8} {'Happiness Change'}")
+            print(f"{'-'*70}")
+            for name in ["Plurality", "Voting for Two", "Anti-Plurality", "Borda"]:
+                r = results[name]
+                h_change = r['final_avg_happiness'] - r['initial_avg_happiness']
+                print(f"{name:<20} {r['initial_winner']:<15} {r['final_winner']:<15} {r['total_strategic_moves']:<8} {h_change:+.3f}")
+            print(f"{'='*70}")
+            
+        elif csv_scheme in scheme_map:
+            scheme_name, voting_func = scheme_map[csv_scheme]
+            print(f"\nAnalyzing {scheme_name} for counter-strategic voting...")
+            
+            result = counter_strategic_voting(voting_func, voting_situation, candidates, voters, preferences)
+            print_counter_strategic_analysis(result, scheme_name)
+        else:
+            print("Invalid choice. Please run the program again and select 1-5.")
+    
     else:
-        print("Invalid choice. Please run the program again and select 1-6.")
+        print("Invalid choice. Please run the program again and select 1-7.")
     
