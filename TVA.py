@@ -20,6 +20,7 @@ from strategic_voting import compute_voting_risk
 from strategic_voting import compute_happiness
 
 from ATVAs.ATVA_4 import strategic_vote_atva4, print_atva4_results
+from ATVAs.ATVA_1 import ATVA_1
 
 
 def get_voting_situation():
@@ -229,6 +230,35 @@ if __name__ == '__main__':
             print("Invalid scheme choice.")
 
         scheme_name, voting_func = scheme_map[sv_scheme]
+
+        if atva_choice == '1':
+            max_size = int(input("Enter maximum coalition size to test: "))
+            print(f"\nRunning ATVA-1 (Full Single-Swap Collusion, best improvement) on {scheme_name}...")
+
+            result = ATVA_1(
+                voting_func,
+                voting_situation,
+                candidates,
+                voters,
+                preferences,
+                max_size
+            )
+
+            print("\n" + "="*60)
+            print("ATVA-1: COLLUSION ANALYSIS (BEST COALITION)")
+            print("="*60)
+            print(f"Honest Winner: {result['original_winner']}")
+            print(f"Honest Avg Happiness: {result['original_avg_happiness']:.3f}")
+
+            if result["collusion_found"]:
+                print(f"\nBest Coalition {result['coalition']} (size {result['coalition_size']}) can manipulate!")
+                print(f"New Winner: {result['new_winner']}")
+                print(f"New Avg Happiness: {result['new_avg_happiness']:.3f}")
+                print(f"Avg Happiness Improvement: {result['improvement']:.3f}")
+            else:
+                print("\nNo beneficial collusion found up to given coalition size.")
+
+        print("="*60)
 
         if atva_choice == '4':
             print(f"\nRunning ATVA-4 on {scheme_name}...")

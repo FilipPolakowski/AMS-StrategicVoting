@@ -24,7 +24,7 @@ def voting_for_two(voting_situation, candidates, voters, preferences):
         
         # print(f"Candidate {candidate} Voting for Two score is: {score}")
 
-    print(f"\nCandidate {winner} is the Voting for Two winner with {max_score} points")
+    #print(f"\nCandidate {winner} is the Voting for Two winner with {max_score} points")
 
     return scores, winner
 
