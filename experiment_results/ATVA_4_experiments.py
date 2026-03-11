@@ -3,9 +3,6 @@ import sys
 import random
 from copy import deepcopy
 
-# ensure the parent directory (workspace root) is on sys.path so that
-# `strategic_voting` and other top-level modules can be imported when
-# this script is run from inside the `experiments/` folder.
 root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if root not in sys.path:
     sys.path.insert(0, root)
@@ -73,7 +70,7 @@ def run_atva4_experiments(voting_schemes, num_situations=50, num_voters=5, num_c
             # BTVA average happiness
             results[scheme_name]["btva_happiness"].append(btva_result["new_avg_happiness"])
 
-            # Change in average happiness for ATVA-4
+            # Change in average happiness
             happiness_gain = (
                 atva4_result["new_avg_happiness"] - atva4_result["original_avg_happiness"]
             )
@@ -87,9 +84,8 @@ def run_atva4_experiments(voting_schemes, num_situations=50, num_voters=5, num_c
                 atva4_sv_count - btva_sv_count
 )
 
-            # Option 1:
+            
             # ATVA-4 happiness gain per ATVA-4 strategic voter
-            # Skip cases where ATVA-4 uses 0 strategic voters
             if atva4_result["strategic_voters_count"] > 0:
                 gain_per_sv = happiness_gain / atva4_result["strategic_voters_count"]
                 results[scheme_name]["gain_per_strategic_voter"].append(gain_per_sv)
