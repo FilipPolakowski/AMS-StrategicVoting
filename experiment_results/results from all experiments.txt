@@ -1,0 +1,229 @@
+C:\Users\Pc\AppData\Local\Python\pythoncore-3.14-64\python.exe C:/Users/Pc/Documents/GitHub/AMS-StrategicVoting/experiments.py
+
+=== Running experiments: voters=4, preferences=4 ===
+
+===== Results (max coalition size = 2, voters = 4, preferences = 4) =====
+Plurality          | R=0.36 | R'=0.10 | New coalitions=0.0% | Avg gain=0.063
+Voting for Two     | R=0.48 | R'=0.28 | New coalitions=2.0% | Avg gain=0.121
+Anti-Plurality     | R=0.56 | R'=0.26 | New coalitions=0.0% | Avg gain=0.181
+Borda              | R=0.46 | R'=0.24 | New coalitions=8.0% | Avg gain=0.045
+
+===== Results (max coalition size = 3, voters = 4, preferences = 4) =====
+Plurality          | R=0.36 | R'=0.10 | New coalitions=0.0% | Avg gain=0.063
+Voting for Two     | R=0.48 | R'=0.28 | New coalitions=2.0% | Avg gain=0.121
+Anti-Plurality     | R=0.56 | R'=0.26 | New coalitions=0.0% | Avg gain=0.181
+Borda              | R=0.46 | R'=0.24 | New coalitions=8.0% | Avg gain=0.045
+
+=== Running experiments: voters=4, preferences=5 ===
+
+===== Results (max coalition size = 2, voters = 4, preferences = 5) =====
+Plurality          | R=0.58 | R'=0.22 | New coalitions=0.0% | Avg gain=0.098
+Voting for Two     | R=0.50 | R'=0.30 | New coalitions=4.0% | Avg gain=0.136
+Anti-Plurality     | R=0.68 | R'=0.50 | New coalitions=0.0% | Avg gain=0.193
+Borda              | R=0.62 | R'=0.20 | New coalitions=0.0% | Avg gain=0.087
+
+===== Results (max coalition size = 3, voters = 4, preferences = 5) =====
+Plurality          | R=0.58 | R'=0.22 | New coalitions=0.0% | Avg gain=0.098
+Voting for Two     | R=0.50 | R'=0.30 | New coalitions=4.0% | Avg gain=0.136
+Anti-Plurality     | R=0.68 | R'=0.50 | New coalitions=0.0% | Avg gain=0.193
+Borda              | R=0.62 | R'=0.20 | New coalitions=0.0% | Avg gain=0.087
+
+=== Running experiments: voters=4, preferences=6 ===
+
+===== Results (max coalition size = 2, voters = 4, preferences = 6) =====
+Plurality          | R=0.48 | R'=0.18 | New coalitions=0.0% | Avg gain=0.079
+Voting for Two     | R=0.58 | R'=0.36 | New coalitions=2.0% | Avg gain=0.166
+Anti-Plurality     | R=0.74 | R'=0.36 | New coalitions=0.0% | Avg gain=0.256
+Borda              | R=0.62 | R'=0.08 | New coalitions=0.0% | Avg gain=0.156
+
+===== Results (max coalition size = 3, voters = 4, preferences = 6) =====
+Plurality          | R=0.48 | R'=0.18 | New coalitions=0.0% | Avg gain=0.079
+Voting for Two     | R=0.58 | R'=0.36 | New coalitions=2.0% | Avg gain=0.166
+Anti-Plurality     | R=0.74 | R'=0.36 | New coalitions=0.0% | Avg gain=0.283
+Borda              | R=0.62 | R'=0.08 | New coalitions=0.0% | Avg gain=0.156
+
+=== Running experiments: voters=4, preferences=7 ===
+
+===== Results (max coalition size = 2, voters = 4, preferences = 7) =====
+Plurality          | R=0.42 | R'=0.24 | New coalitions=0.0% | Avg gain=0.057
+Voting for Two     | R=0.38 | R'=0.28 | New coalitions=4.0% | Avg gain=0.097
+Anti-Plurality     | R=0.76 | R'=0.54 | New coalitions=0.0% | Avg gain=0.197
+Borda              | R=0.56 | R'=0.24 | New coalitions=4.0% | Avg gain=0.083
+
+===== Results (max coalition size = 3, voters = 4, preferences = 7) =====
+Plurality          | R=0.42 | R'=0.24 | New coalitions=0.0% | Avg gain=0.057
+Voting for Two     | R=0.38 | R'=0.28 | New coalitions=4.0% | Avg gain=0.097
+Anti-Plurality     | R=0.76 | R'=0.54 | New coalitions=0.0% | Avg gain=0.197
+Borda              | R=0.56 | R'=0.24 | New coalitions=4.0% | Avg gain=0.083
+
+=== Running experiments: voters=5, preferences=4 ===
+
+===== Results (max coalition size = 2, voters = 5, preferences = 4) =====
+Plurality          | R=0.42 | R'=0.16 | New coalitions=0.0% | Avg gain=0.073
+Voting for Two     | R=0.50 | R'=0.18 | New coalitions=4.0% | Avg gain=0.093
+Anti-Plurality     | R=0.54 | R'=0.32 | New coalitions=0.0% | Avg gain=0.151
+Borda              | R=0.52 | R'=0.08 | New coalitions=0.0% | Avg gain=0.054
+
+===== Results (max coalition size = 3, voters = 5, preferences = 4) =====
+Plurality          | R=0.42 | R'=0.16 | New coalitions=0.0% | Avg gain=0.073
+Voting for Two     | R=0.50 | R'=0.18 | New coalitions=4.0% | Avg gain=0.093
+Anti-Plurality     | R=0.54 | R'=0.32 | New coalitions=0.0% | Avg gain=0.151
+Borda              | R=0.52 | R'=0.08 | New coalitions=0.0% | Avg gain=0.054
+
+=== Running experiments: voters=5, preferences=5 ===
+
+===== Results (max coalition size = 2, voters = 5, preferences = 5) =====
+Plurality          | R=0.44 | R'=0.16 | New coalitions=2.0% | Avg gain=0.051
+Voting for Two     | R=0.52 | R'=0.38 | New coalitions=6.0% | Avg gain=0.129
+Anti-Plurality     | R=0.74 | R'=0.44 | New coalitions=2.0% | Avg gain=0.176
+Borda              | R=0.54 | R'=0.26 | New coalitions=2.0% | Avg gain=0.060
+
+===== Results (max coalition size = 3, voters = 5, preferences = 5) =====
+Plurality          | R=0.44 | R'=0.16 | New coalitions=2.0% | Avg gain=0.051
+Voting for Two     | R=0.52 | R'=0.38 | New coalitions=6.0% | Avg gain=0.129
+Anti-Plurality     | R=0.74 | R'=0.44 | New coalitions=2.0% | Avg gain=0.176
+Borda              | R=0.54 | R'=0.26 | New coalitions=2.0% | Avg gain=0.060
+
+=== Running experiments: voters=5, preferences=6 ===
+
+===== Results (max coalition size = 2, voters = 5, preferences = 6) =====
+Plurality          | R=0.54 | R'=0.22 | New coalitions=0.0% | Avg gain=0.059
+Voting for Two     | R=0.44 | R'=0.22 | New coalitions=6.0% | Avg gain=0.128
+Anti-Plurality     | R=0.76 | R'=0.38 | New coalitions=0.0% | Avg gain=0.199
+Borda              | R=0.66 | R'=0.26 | New coalitions=2.0% | Avg gain=0.109
+
+===== Results (max coalition size = 3, voters = 5, preferences = 6) =====
+Plurality          | R=0.54 | R'=0.22 | New coalitions=0.0% | Avg gain=0.059
+Voting for Two     | R=0.44 | R'=0.22 | New coalitions=6.0% | Avg gain=0.128
+Anti-Plurality     | R=0.76 | R'=0.38 | New coalitions=0.0% | Avg gain=0.199
+Borda              | R=0.66 | R'=0.26 | New coalitions=2.0% | Avg gain=0.109
+
+=== Running experiments: voters=5, preferences=7 ===
+
+===== Results (max coalition size = 2, voters = 5, preferences = 7) =====
+Plurality          | R=0.42 | R'=0.16 | New coalitions=0.0% | Avg gain=0.059
+Voting for Two     | R=0.46 | R'=0.34 | New coalitions=8.0% | Avg gain=0.121
+Anti-Plurality     | R=0.86 | R'=0.56 | New coalitions=0.0% | Avg gain=0.180
+Borda              | R=0.64 | R'=0.20 | New coalitions=2.0% | Avg gain=0.090
+
+===== Results (max coalition size = 3, voters = 5, preferences = 7) =====
+Plurality          | R=0.42 | R'=0.16 | New coalitions=0.0% | Avg gain=0.059
+Voting for Two     | R=0.46 | R'=0.34 | New coalitions=8.0% | Avg gain=0.121
+Anti-Plurality     | R=0.86 | R'=0.56 | New coalitions=0.0% | Avg gain=0.189
+Borda              | R=0.64 | R'=0.20 | New coalitions=2.0% | Avg gain=0.090
+
+=== Running experiments: voters=6, preferences=4 ===
+
+===== Results (max coalition size = 2, voters = 6, preferences = 4) =====
+Plurality          | R=0.48 | R'=0.30 | New coalitions=0.0% | Avg gain=0.039
+Voting for Two     | R=0.44 | R'=0.30 | New coalitions=6.0% | Avg gain=0.065
+Anti-Plurality     | R=0.50 | R'=0.26 | New coalitions=2.0% | Avg gain=0.146
+Borda              | R=0.38 | R'=0.20 | New coalitions=2.0% | Avg gain=0.042
+
+===== Results (max coalition size = 3, voters = 6, preferences = 4) =====
+Plurality          | R=0.48 | R'=0.30 | New coalitions=0.0% | Avg gain=0.039
+Voting for Two     | R=0.44 | R'=0.30 | New coalitions=6.0% | Avg gain=0.065
+Anti-Plurality     | R=0.50 | R'=0.26 | New coalitions=2.0% | Avg gain=0.146
+Borda              | R=0.38 | R'=0.20 | New coalitions=2.0% | Avg gain=0.042
+
+=== Running experiments: voters=6, preferences=5 ===
+
+===== Results (max coalition size = 2, voters = 6, preferences = 5) =====
+Plurality          | R=0.60 | R'=0.36 | New coalitions=2.0% | Avg gain=0.039
+Voting for Two     | R=0.44 | R'=0.28 | New coalitions=6.0% | Avg gain=0.107
+Anti-Plurality     | R=0.80 | R'=0.42 | New coalitions=2.0% | Avg gain=0.120
+Borda              | R=0.46 | R'=0.22 | New coalitions=6.0% | Avg gain=0.034
+
+===== Results (max coalition size = 3, voters = 6, preferences = 5) =====
+Plurality          | R=0.60 | R'=0.36 | New coalitions=2.0% | Avg gain=0.039
+Voting for Two     | R=0.44 | R'=0.30 | New coalitions=8.0% | Avg gain=0.104
+Anti-Plurality     | R=0.80 | R'=0.42 | New coalitions=2.0% | Avg gain=0.123
+Borda              | R=0.46 | R'=0.24 | New coalitions=6.0% | Avg gain=0.033
+
+=== Running experiments: voters=6, preferences=6 ===
+
+===== Results (max coalition size = 2, voters = 6, preferences = 6) =====
+Plurality          | R=0.48 | R'=0.14 | New coalitions=0.0% | Avg gain=0.075
+Voting for Two     | R=0.54 | R'=0.26 | New coalitions=2.0% | Avg gain=0.112
+Anti-Plurality     | R=0.88 | R'=0.40 | New coalitions=0.0% | Avg gain=0.149
+Borda              | R=0.64 | R'=0.26 | New coalitions=0.0% | Avg gain=0.079
+
+===== Results (max coalition size = 3, voters = 6, preferences = 6) =====
+Plurality          | R=0.48 | R'=0.14 | New coalitions=0.0% | Avg gain=0.075
+Voting for Two     | R=0.54 | R'=0.28 | New coalitions=4.0% | Avg gain=0.104
+Anti-Plurality     | R=0.88 | R'=0.40 | New coalitions=0.0% | Avg gain=0.149
+Borda              | R=0.64 | R'=0.26 | New coalitions=0.0% | Avg gain=0.079
+
+=== Running experiments: voters=6, preferences=7 ===
+
+===== Results (max coalition size = 2, voters = 6, preferences = 7) =====
+Plurality          | R=0.62 | R'=0.18 | New coalitions=2.0% | Avg gain=0.054
+Voting for Two     | R=0.50 | R'=0.36 | New coalitions=12.0% | Avg gain=0.085
+Anti-Plurality     | R=0.92 | R'=0.60 | New coalitions=4.0% | Avg gain=0.169
+Borda              | R=0.70 | R'=0.34 | New coalitions=2.0% | Avg gain=0.083
+
+===== Results (max coalition size = 3, voters = 6, preferences = 7) =====
+Plurality          | R=0.62 | R'=0.18 | New coalitions=2.0% | Avg gain=0.054
+Voting for Two     | R=0.50 | R'=0.38 | New coalitions=14.0% | Avg gain=0.083
+Anti-Plurality     | R=0.92 | R'=0.62 | New coalitions=4.0% | Avg gain=0.171
+Borda              | R=0.70 | R'=0.34 | New coalitions=2.0% | Avg gain=0.083
+
+=== Running experiments: voters=7, preferences=4 ===
+
+===== Results (max coalition size = 2, voters = 7, preferences = 4) =====
+Plurality          | R=0.46 | R'=0.12 | New coalitions=0.0% | Avg gain=0.040
+Voting for Two     | R=0.40 | R'=0.24 | New coalitions=10.0% | Avg gain=0.059
+Anti-Plurality     | R=0.62 | R'=0.32 | New coalitions=4.0% | Avg gain=0.121
+Borda              | R=0.50 | R'=0.30 | New coalitions=4.0% | Avg gain=0.049
+
+===== Results (max coalition size = 3, voters = 7, preferences = 4) =====
+Plurality          | R=0.46 | R'=0.12 | New coalitions=0.0% | Avg gain=0.040
+Voting for Two     | R=0.40 | R'=0.26 | New coalitions=12.0% | Avg gain=0.055
+Anti-Plurality     | R=0.62 | R'=0.32 | New coalitions=4.0% | Avg gain=0.121
+Borda              | R=0.50 | R'=0.30 | New coalitions=4.0% | Avg gain=0.049
+
+=== Running experiments: voters=7, preferences=5 ===
+
+===== Results (max coalition size = 2, voters = 7, preferences = 5) =====
+Plurality          | R=0.64 | R'=0.30 | New coalitions=0.0% | Avg gain=0.057
+Voting for Two     | R=0.48 | R'=0.40 | New coalitions=14.0% | Avg gain=0.088
+Anti-Plurality     | R=0.80 | R'=0.42 | New coalitions=2.0% | Avg gain=0.084
+Borda              | R=0.54 | R'=0.28 | New coalitions=4.0% | Avg gain=0.044
+
+===== Results (max coalition size = 3, voters = 7, preferences = 5) =====
+Plurality          | R=0.64 | R'=0.30 | New coalitions=0.0% | Avg gain=0.057
+Voting for Two     | R=0.48 | R'=0.40 | New coalitions=14.0% | Avg gain=0.088
+Anti-Plurality     | R=0.80 | R'=0.42 | New coalitions=2.0% | Avg gain=0.084
+Borda              | R=0.54 | R'=0.28 | New coalitions=4.0% | Avg gain=0.044
+
+=== Running experiments: voters=7, preferences=6 ===
+
+===== Results (max coalition size = 2, voters = 7, preferences = 6) =====
+Plurality          | R=0.56 | R'=0.32 | New coalitions=0.0% | Avg gain=0.048
+Voting for Two     | R=0.46 | R'=0.20 | New coalitions=2.0% | Avg gain=0.092
+Anti-Plurality     | R=0.88 | R'=0.40 | New coalitions=0.0% | Avg gain=0.139
+Borda              | R=0.56 | R'=0.22 | New coalitions=6.0% | Avg gain=0.056
+
+===== Results (max coalition size = 3, voters = 7, preferences = 6) =====
+Plurality          | R=0.56 | R'=0.32 | New coalitions=0.0% | Avg gain=0.048
+Voting for Two     | R=0.46 | R'=0.20 | New coalitions=2.0% | Avg gain=0.092
+Anti-Plurality     | R=0.88 | R'=0.40 | New coalitions=0.0% | Avg gain=0.139
+Borda              | R=0.56 | R'=0.26 | New coalitions=8.0% | Avg gain=0.053
+
+=== Running experiments: voters=7, preferences=7 ===
+
+===== Results (max coalition size = 2, voters = 7, preferences = 7) =====
+Plurality          | R=0.54 | R'=0.24 | New coalitions=2.0% | Avg gain=0.052
+Voting for Two     | R=0.36 | R'=0.30 | New coalitions=16.0% | Avg gain=0.073
+Anti-Plurality     | R=0.92 | R'=0.50 | New coalitions=2.0% | Avg gain=0.179
+Borda              | R=0.56 | R'=0.30 | New coalitions=4.0% | Avg gain=0.043
+
+===== Results (max coalition size = 3, voters = 7, preferences = 7) =====
+Plurality          | R=0.54 | R'=0.24 | New coalitions=2.0% | Avg gain=0.052
+Voting for Two     | R=0.36 | R'=0.36 | New coalitions=22.0% | Avg gain=0.067
+Anti-Plurality     | R=0.92 | R'=0.52 | New coalitions=2.0% | Avg gain=0.175
+Borda              | R=0.56 | R'=0.30 | New coalitions=4.0% | Avg gain=0.043
+
+CSV files saved in ./results_csv/
+
+Process finished with exit code 0
