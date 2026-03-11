@@ -9,14 +9,20 @@
 #Define happiness levels and risk of strategic voting measures
 
 import random
+
+from ATVAs.ATVA_1 import ATVA_1
+from ATVAs.ATVA_2 import counter_strategic_voting, find_strategic_voter, print_counter_strategic_analysis
+from ATVAs.ATVA_3 import print_atva3_results, strategic_vote_atva3
 from voting_schemes.antiplurality_voting import anti_plurality_voting
 from voting_schemes.borda_voting import borda_voting
 from voting_schemes.plurality_voting import plurality_voting
 from voting_schemes.voting_for_two import voting_for_two
+
 from strategic_voting import strategic_vote
 from strategic_voting import compute_voting_risk
 from strategic_voting import compute_happiness
-from counter_strategic_voting import counter_strategic_voting, print_counter_strategic_analysis
+
+from ATVAs.ATVA_4 import strategic_vote_atva4, print_atva4_results
 
 
 def get_voting_situation():
@@ -117,7 +123,7 @@ if __name__ == '__main__':
     print("4. Borda")
     print("5. All (compare all schemes)")
     print("6. Strategic Voting Analysis")
-    print("7. Counter-Strategic Voting Analysis (Advanced TVA)")
+    print("7. ATVA Analysis")
     
     scheme = input("\nEnter your choice (1-7): ").strip()
     
@@ -198,57 +204,108 @@ if __name__ == '__main__':
             print(f"\n{'='*60}")
         else:
             print("Invalid choice. Please run the program again and select 1-4.")
-    
     elif scheme == '7':
-        # Counter-strategic voting analysis
-        print("\nCOUNTER-STRATEGIC VOTING ANALYSIS (ADVANCED TVA)")
-        print("This analyzes multi-round strategic voting where voters respond to each other.")
-        print("\nSelect voting scheme to analyze:")
+        print("\nADVANCED TACTICAL VOTING ANALYSIS (ATVA)")
+        print("Choose ATVA variant:")
+        print("1. ATVA-1")
+        print("2. ATVA-2")
+        print("3. ATVA-3")
+        print("4. ATVA-4 (many voters vote strategically)")
+
+        atva_choice = input("\nEnter your choice (1-4): ").strip()
+
+        print("\nSelect voting scheme for ATVA:")
         print("1. Plurality")
         print("2. Voting for Two")
         print("3. Anti-Plurality")
         print("4. Borda")
         print("5. All (compare all schemes)")
-        
-        csv_scheme = input("\nEnter your choice (1-5): ").strip()
-        
+        sv_scheme = input("\nEnter your choice (1-5): ").strip()
+
         scheme_map = {
             '1': ("Plurality", plurality_voting),
             '2': ("Voting for Two", voting_for_two),
             '3': ("Anti-Plurality", anti_plurality_voting),
-            '4': ("Borda", borda_voting)
+            '4': ("Borda", borda_voting),
         }
-        
-        if csv_scheme == '5':
-            # Run counter-strategic analysis for all schemes
-            results = {}
-            for key, (name, func) in scheme_map.items():
-                print(f"\nAnalyzing {name}...")
-                result = counter_strategic_voting(func, voting_situation, candidates, voters, preferences)
-                results[name] = result
-                print_counter_strategic_analysis(result, name)
-            
-            # Summary comparison
-            print(f"\n{'='*70}")
-            print("COMPARATIVE SUMMARY")
-            print(f"{'='*70}")
-            print(f"\n{'Scheme':<20} {'Initial Winner':<15} {'Final Winner':<15} {'Moves':<8} {'Happiness Change'}")
-            print(f"{'-'*70}")
-            for name in ["Plurality", "Voting for Two", "Anti-Plurality", "Borda"]:
-                r = results[name]
-                h_change = r['final_avg_happiness'] - r['initial_avg_happiness']
-                print(f"{name:<20} {r['initial_winner']:<15} {r['final_winner']:<15} {r['total_strategic_moves']:<8} {h_change:+.3f}")
-            print(f"{'='*70}")
-            
-        elif csv_scheme in scheme_map:
-            scheme_name, voting_func = scheme_map[csv_scheme]
-            print(f"\nAnalyzing {scheme_name} for counter-strategic voting...")
-            
-            result = counter_strategic_voting(voting_func, voting_situation, candidates, voters, preferences)
-            print_counter_strategic_analysis(result, scheme_name)
+
+        if sv_scheme == '5':
+            selected_schemes = [(key, value[0], value[1]) for key, value in scheme_map.items()]
+        elif sv_scheme in scheme_map:
+            selected_schemes = [(sv_scheme, scheme_map[sv_scheme][0], scheme_map[sv_scheme][1])]
         else:
-            print("Invalid choice. Please run the program again and select 1-5.")
-    
-    else:
-        print("Invalid choice. Please run the program again and select 1-7.")
-    
+            print("Invalid scheme choice.")
+            exit()
+
+        if atva_choice == '1':
+            max_size = int(input("Enter maximum coalition size to test: "))
+
+        for scheme_key, scheme_name, voting_func in selected_schemes:
+            print("\n" + "=" * 60)
+            print(f"Running ATVA-{atva_choice} on {scheme_name}...")
+            print("=" * 60)
+
+            if atva_choice == '1':
+                result = ATVA_1(
+                    voting_func,
+                    voting_situation,
+                    candidates,
+                    voters,
+                    preferences,
+                    max_size
+                )
+
+                print("\n" + "="*60)
+                print(f"ATVA-1: COLLUSION ANALYSIS ({scheme_name})")
+                print("="*60)
+                print(f"Honest Winner: {result['original_winner']}")
+                print(f"Honest Avg Happiness: {result['original_avg_happiness']:.3f}")
+
+                if result["collusion_found"]:
+                    print(f"\nBest Coalition {result['coalition']} (size {result['coalition_size']}) can manipulate!")
+                    print(f"New Winner: {result['new_winner']}")
+                    print(f"New Avg Happiness: {result['new_avg_happiness']:.3f}")
+                    print(f"Avg Happiness Improvement: {result['improvement']:.3f}")
+                else:
+                    print("\nNo beneficial collusion found up to given coalition size.")
+
+                print("="*60)
+
+            elif atva_choice == '2':
+                result = counter_strategic_voting(
+                    voting_func,
+                    voting_situation,
+                    candidates,
+                    voters,
+                    preferences,
+                    max_rounds=20
+                )
+
+                print_counter_strategic_analysis(result, scheme_name)
+
+            elif atva_choice == '3':
+                result = strategic_vote_atva3(
+                    voting_func,
+                    voting_situation,
+                    candidates,
+                    voters,
+                    preferences,
+                    scheme_key
+                )
+
+                print_atva3_results(result, scheme_name)
+
+            elif atva_choice == '4':
+                result = strategic_vote_atva4(
+                    voting_func,
+                    voting_situation,
+                    candidates,
+                    voters,
+                    preferences
+                )
+
+                print_atva4_results(result, scheme_name)
+
+            else:
+                print("Invalid ATVA choice.")
+                break
