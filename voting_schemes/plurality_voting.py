@@ -14,6 +14,6 @@ def plurality_voting(voting_situation, candidates, voters, preferences):
     # for candidate in candidates:
     #     print(f"Candidate {candidate} Plurality score is: {scores[candidate]}")
 
-    print(f"\nCandidate {winner} is the Plurality winner with {max_score} points")
+    #print(f"\nCandidate {winner} is the Plurality winner with {max_score} points")
 
     return scores, winner
