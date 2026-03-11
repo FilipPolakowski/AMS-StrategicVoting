@@ -23,7 +23,7 @@ def borda_voting(voting_situation, candidates, voters, preferences):
         
         # print(f"Candidate {candidate} Borda score is: {score}")
 
-    print(f"\nCandidate {winner} is the Borda winner with {max_score} points")
+    #print(f"\nCandidate {winner} is the Borda winner with {max_score} points")
 
     return scores, winner
 
