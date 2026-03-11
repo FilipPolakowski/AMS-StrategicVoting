@@ -28,7 +28,7 @@ def compute_happiness(voting_situation, winner, voters, preferences):
     return happiness_per_voter, average_happiness
 
 
-def _get_voter_pref(voting_situation, voter_index):
+def get_voter_pref(voting_situation, voter_index):
     # extract one voter's preference list from the voting situation matrix
     prefs = []
     for row in voting_situation:
@@ -36,13 +36,13 @@ def _get_voter_pref(voting_situation, voter_index):
     return prefs
 
 
-def _set_voter_pref(voting_situation, voter_index, pref_list):
+def set_voter_pref(voting_situation, voter_index, pref_list):
     # update one voter's preference list in the voting situation matrix
     for r in range(len(pref_list)):
         voting_situation[r][voter_index] = pref_list[r]
 
 
-def _all_strategic_manipulations(pref_list):
+def all_strategic_manipulations(pref_list):
     # generate the following strategic voting options:
     # 1. single swaps between any 2 positions
     # 2. move any candidate to the top to boost
@@ -74,7 +74,7 @@ def _all_strategic_manipulations(pref_list):
     return out
 
 
-def _voting_situation_to_tuple(voting_situation):
+def voting_situation_to_tuple(voting_situation):
     # convert voting situation matrix to a tuple of tuples for hasing -> allows cycle detection
     return tuple(tuple(row) for row in voting_situation)
 
@@ -87,7 +87,7 @@ def find_strategic_voter(voting_function, voting_situation, true_situation,
     order.sort(key=lambda i: (current_happiness[i], -i))
     
     for v in order:
-        current_pref = _get_voter_pref(voting_situation, v)
+        current_pref = get_voter_pref(voting_situation, v)
         baseline_happiness = current_happiness[v]
         
         best_tactical_pref = None
@@ -97,9 +97,9 @@ def find_strategic_voter(voting_function, voting_situation, true_situation,
         best_voter_happiness = baseline_happiness
         
         # try all strategic manipulations
-        for tactical_pref in _all_strategic_manipulations(current_pref):
+        for tactical_pref in all_strategic_manipulations(current_pref):
             trial = deepcopy(voting_situation)
-            _set_voter_pref(trial, v, tactical_pref)
+            set_voter_pref(trial, v, tactical_pref)
             
             _, trial_winner = voting_function(trial, candidates, voters, preferences)
             trial_happiness, trial_avg = compute_happiness(true_situation, trial_winner, voters, preferences)
@@ -115,7 +115,7 @@ def find_strategic_voter(voting_function, voting_situation, true_situation,
         # return improvement if found
         if best_tactical_pref is not None:
             new_matrix = deepcopy(voting_situation)
-            _set_voter_pref(new_matrix, v, best_tactical_pref)
+            set_voter_pref(new_matrix, v, best_tactical_pref)
             
             return {
                 "found": True,
@@ -148,7 +148,7 @@ def counter_strategic_voting(voting_function, voting_situation, candidates, vote
     current_avg = initial_avg
     
     # track already seen states for cycle detection
-    seen_states = {_voting_situation_to_tuple(current_situation)}
+    seen_states = {voting_situation_to_tuple(current_situation)}
     
     # track which voters have voted strategically
     strategic_voters = set()
@@ -193,7 +193,7 @@ def counter_strategic_voting(voting_function, voting_situation, candidates, vote
         current_avg = result["new_avg_happiness"]
         
         # cycle detection
-        state_tuple = _voting_situation_to_tuple(current_situation)
+        state_tuple = voting_situation_to_tuple(current_situation)
         if state_tuple in seen_states:
             equilibrium_type = "cycle"
             break

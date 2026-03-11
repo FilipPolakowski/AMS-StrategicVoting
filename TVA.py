@@ -16,7 +16,7 @@ from voting_schemes.voting_for_two import voting_for_two
 from strategic_voting import strategic_vote
 from strategic_voting import compute_voting_risk
 from strategic_voting import compute_happiness
-from counter_strategic_voting import counter_strategic_voting, print_counter_strategic_analysis
+from ATVA_2 import counter_strategic_voting, print_counter_strategic_analysis
 
 
 def get_voting_situation():
