@@ -18,7 +18,7 @@
 from copy import deepcopy
 import random
 
-from strategic_voting import (
+from voting_schemes.strategic_voting import (
     compute_happiness,   # computes happiness based on TRUE preferences and a winner
     _get_voter_pref,     # read a single voter's ballot from the matrix
     _set_voter_pref,     # write a single voter's ballot into the matrix
@@ -325,7 +325,7 @@ def strategic_vote_atva3(
 
 def print_atva3_results(result, scheme_name):
 
-    from strategic_voting import compute_voting_risk
+    from voting_schemes.strategic_voting import compute_voting_risk
 
     print(f"\n{'='*60}")
     print(f"ATVA-3 ANALYSIS: {scheme_name}")

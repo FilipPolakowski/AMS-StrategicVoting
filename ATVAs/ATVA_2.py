@@ -7,7 +7,7 @@
 
 from copy import deepcopy
 import random
-from strategic_voting import strategic_vote
+from voting_schemes.strategic_voting import strategic_vote
     
 
 def compute_happiness(voting_situation, winner, voters, preferences):

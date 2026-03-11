@@ -12,7 +12,7 @@ def ATVA_1(
     Returns the coalition with the best improvement in average happiness.
     """
     import itertools, copy
-    from strategic_voting import compute_happiness
+    from voting_schemes.strategic_voting import compute_happiness
 
     # Honest outcome
     original_scores, original_winner = voting_func(

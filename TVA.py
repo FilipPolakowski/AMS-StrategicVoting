@@ -15,10 +15,10 @@ from voting_schemes.borda_voting import borda_voting
 from voting_schemes.plurality_voting import plurality_voting
 from voting_schemes.voting_for_two import voting_for_two
 
-from strategic_voting import strategic_vote
-from strategic_voting import compute_voting_risk
-from strategic_voting import compute_happiness
-from ATVA_2 import counter_strategic_voting, print_counter_strategic_analysis
+from voting_schemes.strategic_voting import strategic_vote
+from voting_schemes.strategic_voting import compute_voting_risk
+from voting_schemes.strategic_voting import compute_happiness
+from ATVAs.ATVA_2 import counter_strategic_voting, print_counter_strategic_analysis
 
 from ATVAs.ATVA_4 import strategic_vote_atva4, print_atva4_results
 from ATVAs.ATVA_1 import ATVA_1

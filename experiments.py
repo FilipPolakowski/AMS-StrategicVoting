@@ -9,7 +9,7 @@ from voting_schemes.borda_voting import borda_voting
 from voting_schemes.antiplurality_voting import anti_plurality_voting
 from voting_schemes.voting_for_two import voting_for_two
 
-from strategic_voting import strategic_vote as BTVA
+from voting_schemes.strategic_voting import strategic_vote as BTVA
 
 # Voting rules dictionary
 VOTING_RULES = {
