@@ -2,20 +2,24 @@
 # assuming that nobody else is strategic.
 #
 # Monte Carlo algorithm:
-# - Instead of checking ALL swaps (which is expensive when voters are many),
-#   each strategic voter samples a fixed number of random "swap plans" and
-#   keeps the plan that maximizes THEIR own happiness (computed on TRUE prefs),
-#   under the  assumption that only they vote strategically.
-# - Then we apply ALL chosen plans simultaneously and see what happens.
+# - Instead of exhaustively generating all possible ballots (which is expensive
+#   when voters or candidates grow), each strategic voter samples a fixed number
+#   of random tactical ballots by applying up to #max_swaps random strategic
+#   manipulations (not just single swaps).
+# - Each voter keeps the sampled ballot that maximizes THEIR own happiness
+#   (computed on TRUE prefs) under the assumption that only they vote
+#   strategically.
+# - Finally we apply ALL chosen tactical ballots simultaneously and observe the
+#   resulting outcome.
 
 from copy import deepcopy
 import random
 
 from strategic_voting import (
-    compute_happiness,   # computes happiness based on TRUE preferences and a winner
-    _get_voter_pref,     # read a single voter's ballot from the matrix
-    _set_voter_pref,     # write a single voter's ballot into the matrix
-    _all_single_swaps,   # generate all single-swap neighbors of a ballot
+    compute_happiness,   
+    _get_voter_pref,     
+    _set_voter_pref,     
+    _all_strategic_manipulations,   
 )
 
 # Number of Monte Carlo trials per strategic voter.
@@ -32,13 +36,13 @@ def random_pref_by_swaps(voting_situation, voter_index, max_swaps):
     # Start from the voter's current ballot
     current_pref = _get_voter_pref(voting_situation, voter_index)
 
-    # Apply up to #max_swaps(10) random single-swaps
+    # Apply up to #max_swaps(100) random strategic manipulations
     for _ in range(max_swaps):
 
-        # All ballots reachable by swapping ANY two positions once
-        neighbors = _all_single_swaps(current_pref)
+        # All ballots reachable by any allowable strategic manipulation
+        neighbors = _all_strategic_manipulations(current_pref)
 
-        # Randomly move to one of the single-swap neighbors
+        # Randomly move to one of the strategic neighbors
         current_pref = random.choice(neighbors)
 
     # After up to max_swaps steps, return the final ballot for this trial
@@ -194,7 +198,7 @@ def strategic_vote_atva4(
         for v in strategic_voters
     )
 
-    # ---- 11) Return a structured result object ----
+    
     return {
         # changed = election winner changed OR some strategic voter changed their ballot
         "changed": (new_winner != original_winner) or any_ballot_changed,
@@ -233,7 +237,7 @@ def print_atva4_results(result, scheme_name):
     print(f"  Winner: {result['original_winner']}")
     print(f"  Avg Happiness: {result['original_avg_happiness']:.3f}")
 
-    print("\nATVA-4 Results (below-average voters act strategically, myopic):")
+    print("\nATVA-4 Results (below-average voters vote strategically):")
     print(f"  New Winner: {result['new_winner']}")
     print(f"  New Avg Happiness: {result['new_avg_happiness']:.3f}")
     print(f"  Change in Avg Happiness: {result['new_avg_happiness'] - result['original_avg_happiness']:.3f}")
