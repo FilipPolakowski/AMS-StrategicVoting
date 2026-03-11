@@ -1,6 +1,7 @@
 import random
 import csv
 import os
+import time
 
 from ATVAs.ATVA_1 import ATVA_1
 
@@ -118,19 +119,58 @@ def print_results(results, coalition_size, voters, preferences):
         )
 
 
+def runtime_test(elections):
+    btva_time = 0
+    atva2_time = 0
+    atva3_time = 0
+
+    for rule_name, rule_func in VOTING_RULES.items():
+        for voting_situation, candidates, voters, preferences in elections:
+
+            # --- BTVA ---
+            start = time.perf_counter()
+            BTVA(rule_func, voting_situation, candidates, voters, preferences)
+            btva_time += time.perf_counter() - start
+
+            # --- ATVA coalition size 2 ---
+            start = time.perf_counter()
+            ATVA_1(rule_func, voting_situation, candidates, voters, preferences, max_coalition_size=2)
+            atva2_time += time.perf_counter() - start
+
+            # --- ATVA coalition size 3 ---
+            start = time.perf_counter()
+            ATVA_1(rule_func, voting_situation, candidates, voters, preferences, max_coalition_size=3)
+            atva3_time += time.perf_counter() - start
+
+    print("\n=== Runtime comparison ===")
+    print(f"BTVA total time: {btva_time:.4f} seconds")
+    print(f"ATVA-1 (k=2) total time: {atva2_time:.4f} seconds")
+    print(f"ATVA-1 (k=3) total time: {atva3_time:.4f} seconds")
+
+    print("\nRelative slowdown:")
+    print(f"ATVA-1 k=2 vs BTVA: {atva2_time/btva_time:.2f}x slower")
+    print(f"ATVA-1 k=3 vs BTVA: {atva3_time/btva_time:.2f}x slower")
+
 if __name__ == "__main__":
 
-    num_elections = 50
-    max_coalition_sizes = [2, 3]
+    num_elections = 1
+    voters = 7
+    preferences = 7
+
+    elections = generate_elections(num_elections, voters, preferences)
+
+    runtime_test(elections)
+    #num_elections = 50
+    #max_coalition_sizes = [2, 3]
 
     # Loop over different voter and preference sizes
-    for voters in range(4, 8):        # 4 to 7
-        for preferences in range(4, 8):  # 4 to 7
-            print(f"\n=== Running experiments: voters={voters}, preferences={preferences} ===")
-            elections = generate_elections(num_elections, voters, preferences)
+    #for voters in range(4, 8):        # 4 to 7
+        #for preferences in range(4, 8):  # 4 to 7
+            #print(f"\n=== Running experiments: voters={voters}, preferences={preferences} ===")
+            #elections = generate_elections(num_elections, voters, preferences)
 
-            for max_size in max_coalition_sizes:
-                results = run_experiment(max_size, elections)
-                print_results(results, max_size, voters, preferences)
+            #for max_size in max_coalition_sizes:
+            #    results = run_experiment(max_size, elections)
+             #   print_results(results, max_size, voters, preferences)
 
-    print("\nCSV files saved in ./results_csv/")
+    #print("\nCSV files saved in ./results_csv/")
